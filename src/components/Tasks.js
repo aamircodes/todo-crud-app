@@ -1,12 +1,15 @@
-import React from 'react';
+import Task from './Task';
 
-const Tasks = ({ tasks }) => {
+const Tasks = ({ tasks, updateTask, deleteTask }) => {
   return (
-    <div>
-      {tasks.map((task, i) => (
-        <div key={i}>
-          {task.text} {task.important && <b>important</b>}
-        </div>
+    <div className='container'>
+      {tasks.map((task) => (
+        <Task
+          key={task.id}
+          task={task}
+          updateTask={updateTask}
+          deleteTask={deleteTask}
+        />
       ))}
     </div>
   );

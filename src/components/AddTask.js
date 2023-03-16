@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 const AddTask = ({ onAdd }) => {
   const [text, setText] = useState('');
@@ -13,29 +13,38 @@ const AddTask = ({ onAdd }) => {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    onAdd({ text, important });
+    const id = Math.floor(Math.random() * 100);
+    onAdd({ id, text, important });
     setText('');
     setImportant(false);
   };
+
   return (
-    <form onSubmit={onSubmitHandler}>
-      <input
+    <Form
+      className='d-inline-flex align-items-center'
+      onSubmit={onSubmitHandler}
+    >
+      <Form.Control
         type='text'
-        placeholder='add a task'
+        placeholder='Add a task'
         value={text}
         onChange={handleInputChange}
+        className='me-2'
+        role='textbox'
       />
-      <input
-        className='form-check-input'
+      <Form.Check
         type='checkbox'
         value={important}
+        label='Important'
         checked={important}
         onChange={handleImportantChange}
+        className='me-2'
       />
-      <Button variant='primary' type='submit'>
-        add
+
+      <Button size='sm' variant='primary' type='submit'>
+        Add
       </Button>
-    </form>
+    </Form>
   );
 };
 
